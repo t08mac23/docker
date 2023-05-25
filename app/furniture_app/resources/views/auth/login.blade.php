@@ -12,6 +12,14 @@
             </div>
         @endif
 
+
+        <div class="md-4 font-medium text-sm text-green-600">
+            <form method="GET" action="{{ route('master.index') }}">
+                <button>マスターログインはこちらへ</button>
+            </form>
+        </div>
+
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
 

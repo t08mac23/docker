@@ -15,6 +15,16 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
+
+            $uri = $request->path();
+
+            // URIが以下３つから始まる場合
+            if(Str::startsWith($uri, ['masters/'])) {
+
+                return 'master/index';
+
+            }
+
             return route('login');
         }
     }
