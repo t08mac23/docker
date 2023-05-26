@@ -42,5 +42,21 @@
       <ul>
         <li>管理者（Master）ログインユーザーID: {{ Auth::guard('masters')->check() }}</li>
       </ul>
+
+
+      <form method="POST" action="{{ route('master.logout') }}">
+          @csrf
+          <div class="p-3">
+              @error('auth')
+              <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-3">
+                  &#x26A0; {{ $message }}
+              </div>
+              @enderror
+              <br>
+              <button class="bg-blue-500 text-white rounded px-3 py-2" type="submit">ログアウト</button>
+          </div>
+      </form>
+
+
   </body>
 </html>

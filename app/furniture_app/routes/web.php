@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 include __DIR__ . '/master.php';
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::middleware([
