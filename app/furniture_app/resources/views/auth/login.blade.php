@@ -14,7 +14,9 @@
 
 
         <div class="md-4 font-medium text-sm text-green-600">
-            <form method="GET" action="{{ route('master.index') }}">
+            <form method="POST" action="{{ route('master.index') }}">
+                @csrf
+                @method('GET')
                 <button>マスターログインはこちらへ</button>
             </form>
         </div>

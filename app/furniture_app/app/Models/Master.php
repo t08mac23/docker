@@ -23,4 +23,9 @@ class Master extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // リレーション
+    public function items () {
+        return $this->hasMany(Item::class);
+    }
 }

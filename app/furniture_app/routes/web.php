@@ -17,7 +17,7 @@ include __DIR__ . '/master.php';
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('root');
 
 Route::middleware([
     'auth:sanctum',

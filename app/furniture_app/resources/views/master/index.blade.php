@@ -37,10 +37,10 @@
       @endif
 
       @if (Auth::guard('masters')->check())
-      <div>ユーザーID {{ Auth::guard('masters')->check() }}でログイン中</div>
+      <div>ユーザーID {{ Auth::guard('masters')->user() }}でログイン中</div>
       @endif
       <ul>
-        <li>管理者（Master）ログインユーザーID: {{ Auth::guard('masters')->check() }}</li>
+        <li>管理者（Master）ログインユーザー: {{ Auth::guard('masters')->user() }}</li>
       </ul>
 
 
@@ -56,7 +56,13 @@
               <button class="bg-blue-500 text-white rounded px-3 py-2" type="submit">ログアウト</button>
           </div>
       </form>
-
+      <form method="POST" action="{{ route('root') }}">
+          @csrf
+          @method('GET')
+          <div class="p-3">
+              <button class="bg-blue-500 text-white rounded px-3 py-2" type="submit">トップページへ</button>
+          </div>
+      </form>
 
   </body>
 </html>

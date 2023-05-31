@@ -18,8 +18,8 @@ class Authenticate extends Middleware
 
             $uri = $request->path();
 
-            // URIが以下３つから始まる場合
-            if(Str::startsWith($uri, ['masters/'])) {
+            // URIが以下から始まる場合
+            if(Str::startsWith($uri, ['master/', 'item/'])) {
 
                 return 'master/index';
 

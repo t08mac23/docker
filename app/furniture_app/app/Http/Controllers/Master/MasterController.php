@@ -48,42 +48,4 @@ class MasterController extends Controller
 
     }
 
-
-
-
-
-
-
-
-
-        //新規登録ページの表示
-        public function create() {
-            return view('master.create');
-        }
-
-        // 新規登録の処理
-        public function register(Request $request) {
-
-            // バリデーションルールを定義
-            $request->validate([
-                'master_name'  => 'required',
-                'email' => 'required|unique:masters',
-                'password' => 'required',
-            ]);
-            // DBにデータを保存
-            $action = $request->get('action', 'return');
-            $input  = $request->except('action');
-            Log::debug($action);
-            if ($action === 'submit') {
-                // DBにデータを保存
-                $master = new Master();
-                $master->fill($input);
-                $master->save();
-
-                return view('master.register');
-            } else {
-                return redirect()->route('master.create')->withInput($input);
-            }
-        }
-
 }

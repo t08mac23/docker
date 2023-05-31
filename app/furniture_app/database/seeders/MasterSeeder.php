@@ -21,6 +21,11 @@ class MasterSeeder extends Seeder
                 'email' => 'test@master',
                 'password' => 'test',
             ],
+            [
+                'master_name' => 'Master',
+                'email' => 'master@mail',
+                'password' => 'master',
+            ],
             // ここに追加
         ];
         foreach($init_masters as $init_master) {
