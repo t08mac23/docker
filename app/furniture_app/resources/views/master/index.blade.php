@@ -37,11 +37,11 @@
       @endif
 
       @if (Auth::guard('masters')->check())
-      <div>ユーザーID {{ Auth::guard('masters')->user() }}でログイン中</div>
+        <div>ユーザーID {{ Auth::guard('masters')->id() }}でログイン中</div>
+        <ul>
+          <li>管理者（Master）ログインユーザー: {{ Auth::guard('masters')->user()->master_name }}</li>
+        </ul>
       @endif
-      <ul>
-        <li>管理者（Master）ログインユーザー: {{ Auth::guard('masters')->user() }}</li>
-      </ul>
 
 
       <form method="POST" action="{{ route('master.logout') }}">

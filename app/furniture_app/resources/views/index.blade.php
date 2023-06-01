@@ -29,18 +29,29 @@
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item">
                           <a class="nav-link">
-                            @if (Route::has('login'))
-                              <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                                  @auth
-                                      <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-                                  @else
-                                      <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                                      @if (Route::has('register'))
-                                          <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                                      @endif
-                                  @endauth
+                            @if (Auth::guard('masters')->check())
+                              <div>{{ Auth::guard('masters')->user()->master_name }}でログイン中</div>
+                              <div>
+                                  <form method="POST" action="{{ route('master.index') }}">
+                                      @csrf
+                                      @method('GET')
+                                      <button>マスターページへ</button>
+                                  </form>
                               </div>
+                            @else
+                              @if (Route::has('login'))
+
+                                    @auth
+                                        <a href="{{ url('/dashboard') }}" >Dashboard</a>
+                                    @else
+                                        <a href="{{ route('login') }}" >Log in</a>
+
+                                        @if (Route::has('register'))
+                                            <a href="{{ route('register') }}" >Register</a>
+                                        @endif
+                                    @endauth
+
+                              @endif
                             @endif
                           </a>
                         </li>

@@ -26,7 +26,9 @@ Route::prefix('master')->group(function () {
 
   // 商品投稿・保存・編集・更新・削除
   Route::prefix('item')->group(function () {
+    Route::get('index', [ItemsController::class, 'index'])->name('item.index');
     Route::get('create', [ItemsController::class, 'create'])->name('item.create');
     Route::post('store', [ItemsController::class, 'store'])->name('item.store');
+    Route::get('show', [ItemsController::class, 'show'])->name('item.show');
   });
 });

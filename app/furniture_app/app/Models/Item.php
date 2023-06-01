@@ -9,6 +9,18 @@ class Item extends Model
 {
     use HasFactory;
 
+    public function getColorNameAttribute () {
+        return config('color.'.$this->color_id);
+    }
+
+    public function getCategoryNameAttribute () {
+        return config('category.'.$this->category_id);
+    }
+
+    public function getPlanNameAttribute () {
+        return config('plan.'.$this->plan_id);
+    }
+
     protected $table = 'items';
 
     protected $fillable = [

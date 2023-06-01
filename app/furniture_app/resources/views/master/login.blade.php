@@ -26,11 +26,11 @@ helloworld
     @endif
 
     @if (Auth::guard('masters')->check())
-    <div>ユーザーID {{ Auth::guard('masters')->user() }}でログイン中</div>
+    <div>ユーザーID {{ Auth::guard('masters')->id() }}でログイン中</div>
     @endif
 
     <ul>
-      <li>管理者（Master）ログインユーザー: {{ Auth::guard('masters')->user() }}</li>
+      <li>管理者（Master）ログインユーザー: {{ Auth::guard('masters')->user()->master_name }}</li>
     </ul>
 
     <form method="post" action="{{ route('item.create') }}">
@@ -41,5 +41,12 @@ helloworld
         </div>
     </form>
 
+    <form method="post" action="{{ route('item.index') }}">
+        @csrf
+        @method('GET')
+        <div class="p-3">
+            <button class="bg-blue-500 text-white rounded px-3 py-2" type="submit">商品一覧ページ</button>
+        </div>
+    </form>
 </body>
 </html>

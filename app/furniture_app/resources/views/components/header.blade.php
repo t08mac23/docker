@@ -1,46 +1,81 @@
-<div class="row">
-    <div class="col-md-12 col-xs-10 px-0" style="background-color:lightgreen;">
-        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:lightgreen;">
-                <h1 class="index_level1" class="navbar-brand">FURNITURE</h1>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>FurnitureApp</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Food</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">新規会員登録</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">ログイン</a>
-                    </li>
-                    <li class="antialiased">
-                      <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-                      @if (Route::has('login'))
-                          <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                              @auth
-                                  <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-                              @else
-                                  <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item">
+                          <a class="nav-link">
+                            @if (Auth::guard('masters')->check())
+                              <div>{{ Auth::guard('masters')->user()->master_name }}でログイン中</div>
+                              <div>
+                                  <form method="POST" action="{{ route('master.index') }}">
+                                      @csrf
+                                      @method('GET')
+                                      <button>マスターページへ</button>
+                                  </form>
+                              </div>
+                            @else
+                              @if (Route::has('login'))
 
-                                  @if (Route::has('register'))
-                                      <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                                  @endif
-                              @endauth
-                          </div>
-                      @endif
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-black" type="submit">Search</button>
-                </form>
+                                    @auth
+                                        <a href="{{ url('/dashboard') }}" >Dashboard</a>
+                                    @else
+                                        <a href="{{ route('login') }}" >Log in</a>
+
+                                        @if (Route::has('register'))
+                                            <a href="{{ route('register') }}" >Register</a>
+                                        @endif
+                                    @endauth
+
+                              @endif
+                            @endif
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link">
+                            @auth
+                              <p>ようこそ、{{ Auth::user()->name }}さん</p>
+                            @endauth
+                          </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    </ul>
                 </div>
-            </nav>
-    </div>
-</div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container">
+                <div class="masthead-subheading">Welcome To Our Studio!</div>
+                <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
+            </div>
+        </header>

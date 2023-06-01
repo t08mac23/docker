@@ -12,13 +12,30 @@ use Illuminate\Support\Facades\Log;
 
 class ItemsController extends Controller
 {
+
+  // 商品一覧ページ
+  public function index () {
+
+    if (Auth::guard('masters')->user() == null) {
+      return redirect('master/index');
+    }else {
+      $items = Item::orderBy('created_at', 'desc')->get();
+      $user = auth()->user();
+      return view('master.item.index', compact('items', 'user'));
+    }
+  }
+
+
     // 投稿画面へ遷移
     public function create () {
 
+      $colors = config('color');
+      $categories = config('category');
+      $plans = config('plan');
       if (Auth::guard('masters')->user() == null) {
         return redirect('master/index');
       }else {
-        return view('master.item.create');
+        return view('master.item.create')->with(['colors' => $colors])->with(['categories' => $categories])->with(['plans' => $plans]);
       }
     }
 
@@ -32,9 +49,9 @@ class ItemsController extends Controller
         'width'=>'required',
         'length'=>'required',
         'release_day'=>'required',
-        'color_id'=>'required|numeric',
-        'category_id'=>'required|numeric',
-        'plan_id'=>'required|numeric',
+        'color_id'=>'numeric',
+        'category_id'=>'numeric',
+        'plan_id'=>'numeric',
         'img_path'=>'image|required',
       ]);
 
@@ -45,9 +62,9 @@ class ItemsController extends Controller
       $item->width = $inputs['width'];
       $item->length = $inputs['length'];
       $item->release_day = $inputs['release_day'];
-      $item->color_id = $inputs['color_id'];
-      $item->category_id = $inputs['category_id'];
-      $item->plan_id = $inputs['plan_id'];
+      $item->color_id = $request->color;
+      $item->category_id = $request->category;
+      $item->plan_id = $request->plan;
       $item->master_id = Auth::guard('masters')->id();
 
       // 画像保存
@@ -60,5 +77,9 @@ class ItemsController extends Controller
 
       $item->save();
       return view('master.item.store');
+    }
+
+    public function show () {
+      return view('master.item.show');
     }
 }
