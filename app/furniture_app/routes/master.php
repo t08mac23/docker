@@ -32,6 +32,7 @@ Route::prefix('master')->group(function () {
     Route::get('show/{item}', [ItemsController::class, 'show'])->name('item.show');
     Route::get('edit/{item}', [ItemsController::class, 'edit'])->name('item.edit');
     Route::put('show/{item}', [ItemsController::class, 'update'])->name('item.update');
+    Route::delete('destroy/{item}', [ItemsController::class, 'destroy'])->name('item.destroy');
       // ダイレクトアクセスの禁止
     Route::get('store', function () {
         return redirect('master/item/index');

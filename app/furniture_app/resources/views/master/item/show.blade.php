@@ -28,6 +28,15 @@
   </div>
 </form>
 
+<form method="POST" action="{{ route('item.destroy', $item->id) }}">
+  @csrf
+  @method('DELETE')
+  <div class="p-3">
+      <button class="bg-red-300 bg-blue-500 text-white rounded px-3 py-2" type="submit"
+      onClick="return confirm('本当に削除しますか?');">削除する</button>
+  </div>
+</form>
+
 <form method="POST" action="{{ route('item.index') }}">
   @csrf
   @method('GET')

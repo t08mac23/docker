@@ -143,4 +143,15 @@ class ItemsController extends Controller
 
       return view('master.item.show', compact('item'))->with('更新が完了しました');
     }
+
+
+    // 商品の削除
+    public function destroy (Item $item) {
+      if ($item->master_id == Auth::guard('masters')->id()) {
+        $item->delete();
+        return redirect()->route('item.index')->with('message', '投稿を削除際ました');
+      }else {
+        return redirect()->route('item.show', $item);
+      }
+    }
 }
