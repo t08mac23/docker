@@ -39,7 +39,7 @@ class ItemsController extends Controller
       }
     }
 
-    // データベースに保存
+    // 商品をデータベースに保存
     public function store (Request $request) {
 
       // バリデーション
@@ -79,7 +79,68 @@ class ItemsController extends Controller
       return view('master.item.store');
     }
 
-    public function show () {
-      return view('master.item.show');
+
+    // 商品の詳細ページへ
+    public function show (Item $item) {
+      // ログインしていないユーザーは詳細ページへいけない
+      if (Auth::guard('masters')->user() == null) {
+        return redirect('master/index');
+      }else{
+        return view('master.item.show', compact('item'));
+      }
+    }
+
+
+    // 編集ページへ
+    public function edit (Item $item) {
+      $colors = config('color');
+      $categories = config('category');
+      $plans = config('plan');
+      // ログインしているユーザーと投稿者が同じなら編集ページへ行ける
+      if ($item->master_id == Auth::guard('masters')->id()) {
+        return view('master.item.edit', compact('item'))->with(['colors' => $colors])->with(['categories' => $categories])->with(['plans' => $plans]);
+      }else {
+        return redirect()->route('item.show', $item);
+      }
+    }
+
+
+    // 商品更新の処理
+    public function update (Request $request, Item $item) {
+
+      // バリデーション
+      $inputs = $request->validate([
+        'name'=>'required',
+        'height'=>'required',
+        'width'=>'required',
+        'length'=>'required',
+        'release_day'=>'required',
+        'color_id'=>'numeric',
+        'category_id'=>'numeric',
+        'plan_id'=>'numeric',
+        'img_path'=>'image|required',
+      ]);
+
+      // 商品データ更新
+      $item->name = $request->name;
+      $item->height = $request->height;
+      $item->width = $request->width;
+      $item->length = $request->length;
+      $item->release_day = $request->release_day;
+      $item->color_id = $request->color;
+      $item->category_id = $request->category;
+      $item->plan_id = $request->plan;
+
+      // 画像保存
+      if (request('img_path')) {
+        $original = request()->file('img_path')->getClientOriginalName();
+        $name = date('Ymd_His').'_'.$original;
+        request()->file('img_path')->move('storage/images', $name);
+        $item->img_path = $name;
+      }
+
+      $item->save();
+
+      return view('master.item.show', compact('item'))->with('更新が完了しました');
     }
 }

@@ -29,6 +29,12 @@ Route::prefix('master')->group(function () {
     Route::get('index', [ItemsController::class, 'index'])->name('item.index');
     Route::get('create', [ItemsController::class, 'create'])->name('item.create');
     Route::post('store', [ItemsController::class, 'store'])->name('item.store');
-    Route::get('show', [ItemsController::class, 'show'])->name('item.show');
+    Route::get('show/{item}', [ItemsController::class, 'show'])->name('item.show');
+    Route::get('edit/{item}', [ItemsController::class, 'edit'])->name('item.edit');
+    Route::put('show/{item}', [ItemsController::class, 'update'])->name('item.update');
+      // ダイレクトアクセスの禁止
+    Route::get('store', function () {
+        return redirect('master/item/index');
+    });
   });
 });
