@@ -6,71 +6,45 @@
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
   </head>
   <body>
-      <form action="{{ route('master.login') }}"  method="POST" >
-        @csrf
-        <div class="p-3">
+    <x-header/>
+    <div class="bg-white py-6 sm:py-8 lg:py-12">
+      <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+        <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl">Master Login</h2>
+
+        <form action="{{ route('master.login') }}"  method="POST" class="mx-auto max-w-lg rounded-lg border">
+            @csrf
             @error('auth')
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-3">
                 &#x26A0; {{ $message }}
             </div>
             @enderror
-            <label class="block">メールアドレス</label>
-            <input class="border rounded mb-3 px-2 py-1" type="text" name="email">
-            <label class="block">パスワード</label>
-            <input class="border rounded mb-3 px-2 py-1" type="password" name="password">
-            <label class="block">ユーザータイプ</label>
-            <select name="guard" class="border rounded px-2 py-1 mb-5">
+            <div class="flex flex-col gap-4 p-4 md:p-8">
+            <div>
+              <label for="email" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">メールアドレス</label>
+              <input name="email" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+            </div>
+
+            <div>
+              <label for="password" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">パスワード</label>
+              <input name="password" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+            </div>
+
+            <select name="guard" class="mb-2 inline-block text-sm text-gray-800 sm:text-base w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring">
                 <option value="">▼選択してください</option>
                 <option value="masters">マスター</option>
                 <option value="musicians">ミュージシャン</option>
                 <option value="athletes">アスリート</option>
             </select>
-            <br>
-            <button class="bg-blue-500 text-white rounded px-3 py-2" type="submit">ログイン</button>
+            @unless (Auth::guard('masters')->check())
+            <button class="block rounded-lg bg-gray-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100
+            hover:bg-gray-700 focus-visible:ring active:bg-gray-600 md:text-base" type="submit">ログイン</button>
+            @endunless
+        </form>
+        <div class="flex items-center justify-center bg-gray-100 p-4">
+          <p class="text-center text-sm text-gray-500">Don't have an account? <a href="#" class="text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700">Register</a></p>
         </div>
-      </form>
-
-      @if (session('logout'))
-        <div class="alert alert-danger">
-          {{ session('logout') }}
-        </div>
-      @endif
-
-      @if (Auth::guard('masters')->check())
-        <div>ユーザーID {{ Auth::guard('masters')->id() }}でログイン中</div>
-        <ul>
-          <li>管理者（Master）ログインユーザー: {{ Auth::guard('masters')->user()->master_name }}</li>
-        </ul>
-      @endif
-
-
-      <form method="POST" action="{{ route('master.logout') }}">
-          @csrf
-          <div class="p-3">
-              @error('auth')
-              <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-3">
-                  &#x26A0; {{ $message }}
-              </div>
-              @enderror
-              <br>
-              <button class="bg-blue-500 text-white rounded px-3 py-2" type="submit">ログアウト</button>
-          </div>
-      </form>
-      <form method="POST" action="{{ route('root') }}">
-          @csrf
-          @method('GET')
-          <div class="p-3">
-              <button class="bg-blue-500 text-white rounded px-3 py-2" type="submit">トップページへ</button>
-          </div>
-      </form>
-
-      <form method="POST" action="{{ route('item.index') }}">
-          @csrf
-          @method('GET')
-          <div class="p-3">
-              <button class="bg-blue-500 text-white rounded px-3 py-2" type="submit">商品一覧ページへ</button>
-          </div>
-      </form>
-
+      </div>
+    </div>
+    <x-footer/>
   </body>
 </html>

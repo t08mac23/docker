@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 include __DIR__ . '/master.php';
 
-Route::get('/', function () {
-    return view('index');
-})->name('root');
+
+Route::get('/', [HomeController::class, 'index'])->name('root');
 
 Route::middleware([
     'auth:sanctum',

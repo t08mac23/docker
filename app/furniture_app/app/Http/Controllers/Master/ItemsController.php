@@ -76,17 +76,20 @@ class ItemsController extends Controller
       }
 
       $item->save();
-      return view('master.item.store');
+      return redirect()->route('item.index')->with('message', '投稿しました');
     }
 
 
     // 商品の詳細ページへ
     public function show (Item $item) {
+      $color = config('color');
+      $category = config('category');
+      $plan = config('plan');
       // ログインしていないユーザーは詳細ページへいけない
       if (Auth::guard('masters')->user() == null) {
         return redirect('master/index');
       }else{
-        return view('master.item.show', compact('item'));
+        return view('master.item.show', compact('item'))->with(['color' => $color])->with(['category' => $category])->with(['plan' => $plan]);
       }
     }
 

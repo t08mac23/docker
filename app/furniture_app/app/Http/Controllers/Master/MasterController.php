@@ -25,10 +25,7 @@ class MasterController extends Controller
         $guard = $request->guard;
 
         if(Auth::guard($guard)->attempt($credentials)) {
-
-            return view('master.login')->with([
-                'login' => 'ログインしました'
-            ]); // ログインしたらリダイレクト
+            return redirect()->route('item.index'); // ログインしたらリダイレクト
         }
 
         return back()->withErrors([

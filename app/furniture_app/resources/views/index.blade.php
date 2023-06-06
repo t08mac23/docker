@@ -15,6 +15,9 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <!-- Swiper -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+        <link rel="stylesheet" href="{{ asset('/css/item_index.css')  }}" >
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -28,39 +31,30 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item">
-                          <a class="nav-link">
                             @if (Auth::guard('masters')->check())
-                              <div>{{ Auth::guard('masters')->user()->master_name }}でログイン中</div>
-                              <div>
-                                  <form method="POST" action="{{ route('master.index') }}">
-                                      @csrf
-                                      @method('GET')
-                                      <button>マスターページへ</button>
-                                  </form>
-                              </div>
+                              <a class="nav-link" href="{{ route('master.index') }}">
+                                {{ Auth::guard('masters')->user()->master_name }}でログイン中
+                              </a>
                             @else
                               @if (Route::has('login'))
+                                @auth
+                                    <a class="nav-link" href="{{ url('/dashboard') }}" >Dashboard</a>
+                                @else
+                                    <a class="nav-link" href="{{ route('login') }}" >Log in</a>
 
-                                    @auth
-                                        <a href="{{ url('/dashboard') }}" >Dashboard</a>
-                                    @else
-                                        <a href="{{ route('login') }}" >Log in</a>
-
-                                        @if (Route::has('register'))
-                                            <a href="{{ route('register') }}" >Register</a>
-                                        @endif
-                                    @endauth
-
+                                    @if (Route::has('register'))
+                                    <li class="nav-item">
+                                      <a class="nav-link" href="{{ route('register') }}" >Register</a>
+                                    </li>
+                                    @endif
+                                @endauth
                               @endif
                             @endif
-                          </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link">
                             @auth
-                              <p>ようこそ、{{ Auth::user()->name }}さん</p>
+                            <a class="nav-link" href="{{ ('user/profile') }}">ようこそ、{{ Auth::user()->name }}さん</a>
                             @endauth
-                          </a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
@@ -76,7 +70,7 @@
             <div class="container">
                 <div class="masthead-subheading">Welcome To Our Studio!</div>
                 <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
+                <a class="btn btn-primary btn-xl text-uppercase" href="{{ route('master.index') }}">Let Me See</a>
             </div>
         </header>
         <!-- Services-->
@@ -321,25 +315,6 @@
                 </div>
             </div>
         </section>
-        <!-- Clients-->
-        <div class="py-5">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="{{ asset('img/portfolio/1.jpg') }}" alt="..." aria-label="Microsoft Logo" /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="{{ asset('img/portfolio/1.jpg') }}" alt="..." aria-label="Google Logo" /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="{{ asset('img/portfolio/1.jpg') }}" alt="..." aria-label="Facebook Logo" /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="{{ asset('img/portfolio/1.jpg') }}" aria-label="IBM Logo" /></a>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Contact-->
         <section class="page-section" id="contact">
             <div class="container">
@@ -438,18 +413,22 @@
                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Client:</strong>
-                                            Threads
+                                          <form action="{{ route('item.index') }}" method="post" >
+                                            @csrf
+                                            @method('GET')
+                                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                                Details
+                                            </button>
+                                          </form>
                                         </li>
                                         <li>
-                                            <strong>Category:</strong>
-                                            Illustration
+                                          <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                              <i class="fas fa-xmark me-1"></i>
+                                              Close Project
+                                          </button>
                                         </li>
                                     </ul>
-                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                        <i class="fas fa-xmark me-1"></i>
-                                        Close Project
-                                    </button>
+
                                 </div>
                             </div>
                         </div>
@@ -632,6 +611,36 @@
                 </div>
             </div>
         </div>
+
+        <!-- Sliderを包むコンテナ要素 -->
+        <div class="swiper">
+          <!-- スライド要素を包む要素 -->
+          <div class="swiper-wrapper">
+            <!-- 各スライド -->
+            <div class="swiper-slide slide1">
+              <p>slide1</p>
+            </div>
+            <div class="swiper-slide slide2">
+              <p>slide2</p>
+            </div>
+            <div class="swiper-slide slide3">
+              <p>slide3</p>
+            </div>
+            <div class="swiper-slide slide4">
+              <p>slide4</p>
+            </div>
+            <div class="swiper-slide slide5">
+              <p>slide5</p>
+            </div>
+            <div class="swiper-slide slide6">
+              <p>slide6</p>
+            </div>
+          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
@@ -641,5 +650,8 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <!-- Swiper -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+        <script src="{{ asset('/js/master.js') }}"></script>
     </body>
 </html>
