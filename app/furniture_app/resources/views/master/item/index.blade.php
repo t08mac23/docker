@@ -46,9 +46,6 @@
         //横幅768px以下（スマホ）に適用させるJavaScriptを記述
         $("#float_button").removeClass("float_button");
         $("#float_button").addClass("sm_float_button");
-      }else {
-        //横幅768px以上（PC、タブレット）に適用させるJavaScriptを記述
-        console.log('hello');
       }
     </script>
   </body>

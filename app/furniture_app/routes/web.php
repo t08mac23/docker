@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\User\FurnitureController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+Route::prefix('furniture')->group(function () {
+    Route::get('index', [FurnitureController::class, 'index'])->name('furniture.index');
+    Route::get('show/{item}', [FurnitureController::class, 'show'])->name('furniture.show');
 });
