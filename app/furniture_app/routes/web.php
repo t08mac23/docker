@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\FurnitureController;
+use App\Http\Controllers\User\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,9 @@ Route::middleware([
 Route::prefix('furniture')->group(function () {
     Route::get('index', [FurnitureController::class, 'index'])->name('furniture.index');
     Route::get('show/{item}', [FurnitureController::class, 'show'])->name('furniture.show');
+    // サブスク
+    Route::prefix('subscription')->group(function () {
+        Route::get('create/{item}', [SubscriptionController::class, 'create'])->name('sub.create');
+        Route::post('store/{item}', [SubscriptionController::class, 'store'])->name('sub.store');
+    });
 });

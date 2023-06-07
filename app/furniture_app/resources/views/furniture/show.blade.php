@@ -8,26 +8,7 @@
   <title>家具詳細</title>
 </head>
 <body>
-  <header>
-    <div class="bg-white py-6 sm:py-8 lg:py-12">
-      <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-        <div class="mb-6 flex items-end justify-between gap-4">
-          <h2 class="text-2xl font-bold text-gray-800 lg:text-3xl">SELECTED</h2>
-          <a href="{{ route('root') }}" class="inline-block rounded-lg border bg-white px-4 py-2 text-center
-          text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100
-          focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">
-            @auth
-              {{ Auth::user()->name }}さん
-            @endauth
-          </a>
-          <a href="javascript:history.back()" class="inline-block rounded-lg border bg-white px-4 py-2 text-center
-          text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100
-          focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">一覧へもどる
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
+<x-second_header/>
 <div class="bg-white py-6 sm:py-8 lg:py-12">
   <div class="mx-auto max-w-screen-lg px-4 md:px-8">
     <div class="grid gap-8 md:grid-cols-2">
@@ -140,7 +121,9 @@
 
         <!-- buttons - start -->
         <div class="flex gap-2.5">
-          <a href="#" class="inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">Add to cart</a>
+          <a href="{{ route('sub.create' ,$item) }}" class="inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
+            Add to cart
+          </a>
 
           <a href="#" class="inline-block rounded-lg bg-gray-200 px-4 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

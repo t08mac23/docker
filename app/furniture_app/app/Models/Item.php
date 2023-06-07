@@ -40,5 +40,8 @@ class Item extends Model
         return $this->belongsTo(Master::class);
     }
 
+    public function subscriptions () {
+        return $this->hasMany(Subscription::class);
+    }
 
 }
