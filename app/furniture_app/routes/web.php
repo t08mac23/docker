@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\User\UsersController;
 use App\Http\Controllers\User\FurnitureController;
 use App\Http\Controllers\User\SubscriptionController;
 
@@ -26,11 +27,10 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [UsersController::class, 'index'])->name('dashboard');
 });
 
+// 商品一覧・詳細
 Route::prefix('furniture')->group(function () {
     Route::get('index', [FurnitureController::class, 'index'])->name('furniture.index');
     Route::get('show/{item}', [FurnitureController::class, 'show'])->name('furniture.show');

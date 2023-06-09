@@ -40,8 +40,12 @@ class Item extends Model
         return $this->belongsTo(Master::class);
     }
 
-    public function subscriptions () {
-        return $this->hasMany(Subscription::class);
+    public function users() {
+         return $this->belongsToMany('App\Models\User');
+    }
+
+    public function item_user () {
+        return $this->hasMany(Item_user::class);
     }
 
 }

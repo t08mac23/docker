@@ -59,8 +59,15 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+
+
+
     // リレーション
-    public function subscriptions () {
-        return $this->hasMany(Subscription::class);
+    public function items () {
+        return $this->belongsToMany('App\Models\Item')->withPivot('quantity', 'created_at');
+    }
+
+    public function item_user () {
+        return $this->hasMany(Item_user::class);
     }
 }
