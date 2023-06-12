@@ -18,11 +18,23 @@ class UsersController extends Controller
         $this->middleware('auth');
     }
 
-    public function index (Item $item, Item_user $subscription) {
+    // マイページでの登録した商品一覧
+    public function index (Item $item, Item_user $item_user) {
 
         $items = Item::orderBy('created_at', 'desc')->paginate(1);
-        $subscriptions = Auth::user()->item_user()->orderBy('created_at', 'desc')->paginate(10);
+        $item_users = Auth::user()->item_user()->orderBy('created_at', 'desc')->paginate(5);
 
-        return view('dashboard', $item, compact( 'items', 'item', 'subscriptions'));
+        return view('dashboard', $item, compact( 'items', 'item', 'item_users'));
     }
+
+    // マイページでの登録した商品詳細
+    public function show (Item $item, Item_user $item_user) {
+
+        $color = config('color');
+        $category = config('category');
+        $plan = config('plan');
+        return view('dashboard_show', $item, compact('item', 'item_user'))
+            ->with(['color' => $color])->with(['category' => $category])->with(['plan' => $plan]);
+    }
+
 }

@@ -50,7 +50,7 @@
                                         <span class="text-lg font-semibold text-white lg:text-xl">Decoration</span>
                                     </div>
                                 </a>
-                                <form method="POST" action="{{ route('furniture.index', $item) }}">
+                                <form method="POST" action="{{ route('dashboard.show', $item) }}">
                                     @csrf
                                     @method('GET')
                                     <div class="p-3">

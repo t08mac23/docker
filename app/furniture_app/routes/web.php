@@ -28,15 +28,18 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', [UsersController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/show/{item}', [UsersController::class, 'show'])->name('dashboard.show');
 });
 
 // 商品一覧・詳細
 Route::prefix('furniture')->group(function () {
     Route::get('index', [FurnitureController::class, 'index'])->name('furniture.index');
     Route::get('show/{item}', [FurnitureController::class, 'show'])->name('furniture.show');
+
     // サブスク
     Route::prefix('subscription')->group(function () {
         Route::get('create/{item}', [SubscriptionController::class, 'create'])->name('sub.create');
         Route::post('store/{item}', [SubscriptionController::class, 'store'])->name('sub.store');
+        Route::delete('destroy/{item}', [SubscriptionController::class, 'destroy'])->name('sub.destroy');
     });
 });

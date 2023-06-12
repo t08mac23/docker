@@ -8,6 +8,7 @@ use App\Models\item_user;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Log;
 
 class SubscriptionController extends Controller
 {
@@ -24,16 +25,25 @@ class SubscriptionController extends Controller
         }
     }
 
-    public function store (Request $request, Item $item) {
+    public function store (Request $request) {
 
         // 商品を登録
-        $subscription = new Item_user();
-        $subscription->quantity = $request->quantity;
-        $subscription->item_id = $request->item_id;
-        $subscription->user_id = Auth::guard('web')->id();
+        $item_user = new Item_user();
+        $item_user->quantity = $request->quantity;
+        $item_user->item_id = $request->item_id;
+        $item_user->user_id = Auth::guard('web')->id();
 
-        $subscription->save();
+        $item_user->save();
 
         return redirect()->route('furniture.index');
+    }
+
+
+    // 登録した商品の削除
+    public function destroy (Item $item) {
+
+        Log::debug($item);
+        $item_user->delete();
+        return redirect()->route('dashboard');
     }
 }
