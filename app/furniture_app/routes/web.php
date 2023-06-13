@@ -40,6 +40,6 @@ Route::prefix('furniture')->group(function () {
     Route::prefix('subscription')->group(function () {
         Route::get('create/{item}', [SubscriptionController::class, 'create'])->name('sub.create');
         Route::post('store/{item}', [SubscriptionController::class, 'store'])->name('sub.store');
-        Route::delete('destroy/{item}', [SubscriptionController::class, 'destroy'])->name('sub.destroy');
+        Route::delete('destroy/{item_user}', [SubscriptionController::class, 'destroy'])->name('sub.destroy');
     });
 });

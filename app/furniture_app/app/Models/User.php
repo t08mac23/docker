@@ -67,7 +67,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Item')->withPivot('quantity', 'created_at');
     }
 
-    public function item_user () {
-        return $this->hasMany(Item_user::class);
+    public function item_users () {
+        return $this->hasMany(ItemUser::class);
     }
 }

@@ -44,8 +44,8 @@ class Item extends Model
          return $this->belongsToMany('App\Models\User');
     }
 
-    public function item_user () {
-        return $this->hasMany(Item_user::class);
+    public function item_users () {
+        return $this->hasMany(ItemUser::class);
     }
 
 }

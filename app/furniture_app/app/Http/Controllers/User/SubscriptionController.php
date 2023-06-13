@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\item_user;
+use App\Models\ItemUser;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +28,7 @@ class SubscriptionController extends Controller
     public function store (Request $request) {
 
         // 商品を登録
-        $item_user = new Item_user();
+        $item_user = new ItemUser();
         $item_user->quantity = $request->quantity;
         $item_user->item_id = $request->item_id;
         $item_user->user_id = Auth::guard('web')->id();

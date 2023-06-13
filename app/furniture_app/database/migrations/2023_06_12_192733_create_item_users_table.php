@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItemsUsersTable extends Migration
+class CreateItemUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,8 @@ class CreateItemsUsersTable extends Migration
     {
         Schema::create('item_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('user_id')->onDelete('cascade');
+            $table->unsignedBigInteger('item_id')->onDelete('cascade');
             $table->integer('quantity')->nullable(false);
             $table->timestamps();
         });
