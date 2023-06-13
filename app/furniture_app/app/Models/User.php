@@ -70,4 +70,8 @@ class User extends Authenticatable
     public function item_users () {
         return $this->hasMany(ItemUser::class);
     }
+
+    public function posts () {
+        return $this->hasMany(Post::class);
+    }
 }

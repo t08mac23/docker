@@ -61,6 +61,50 @@
                         @endforeach
                         <!-- product - end -->
 
+
+                        <div class="bg-white py-6 sm:py-8 lg:py-12">
+                            <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+                                <div class="mb-6 flex items-end justify-between gap-4">
+                                    <h2 class="text-2xl font-bold text-gray-800 lg:text-3xl">REVIEWS</h2>
+                                </div>
+
+                                <div class="grid gap-x-4 gap-y-6 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
+                                    <!-- product - start -->
+                                    @foreach(auth()->user()->posts as $post)
+                                        <div>
+                                            <a href="#" class="group mb-2 block h-96 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:mb-3">
+                                                {{ $post->body }}
+                                            </a>
+
+                                            <div class="flex flex-col">
+                                                <span class="text-gray-500">{{ $post->nickname }}</span>
+                                                <a href="#" class="text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl">{{ $post->review }}</a>
+                                                <a href="#" class="text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl">{{ $post->created_at }}</a>
+                                            </div>
+                                            @if($post->user_id == Auth::guard('web')->id())
+                                                <form method="POST" action="{{ route('post.edit', $post) }}">
+                                                    @csrf
+                                                    @method('GET')
+                                                    <div class="p-3">
+                                                        <button class="bg-yellow-500 text-green-800 rounded px-3 py-2" type="submit">編集ページへ</button>
+                                                    </div>
+                                                </form>
+
+                                                <form method="POST" action="{{ route('post.destroy', $post->id) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <div class="p-3">
+                                                        <button class="bg-red-300 bg-red-500 text-red-600 rounded px-3 py-2" type="submit"
+                                                        onClick="return confirm('本当に削除しますか?');">削除する</button>
+                                                    </div>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                    <!-- product - end -->
+                                </div>
+                            </div>
+                        </div>
                         </x-app-layout>
                     </div>
                 </div>

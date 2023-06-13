@@ -40,10 +40,13 @@ class SubscriptionController extends Controller
 
 
     // 登録した商品の削除
-    public function destroy (Item $item) {
-
-        Log::debug($item);
-        $item_user->delete();
-        return redirect()->route('dashboard');
+    public function destroy (ItemUser $item_user) {
+        if ($item_user != null) {
+            Log::debug($item_user);
+            $item_user->delete();
+            return redirect()->route('dashboard');
+        }else {
+            return redirect()->route('dashboard.show',  $item_user);
+        }
     }
 }

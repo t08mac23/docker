@@ -329,31 +329,39 @@
                 <!-- To make this form functional, sign up at-->
                 <!-- https://startbootstrap.com/solution/contact-forms-->
                 <!-- to get an API token!-->
-                <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                <form action="{{ route('post.store') }}" method="POST" id="contactForm" >
+                    @csrf
                     <div class="row align-items-stretch mb-5">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <!-- Name input-->
-                                <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                                <input class="form-control" name="nickname" value="{{ old('nickname') }}"id="nickname" type="text" placeholder="ニックネーム *" data-sb-validations="required" />
+                                <div class="invalid-feedback" data-sb-feedback="nickname:required">A nickname is required.</div>
                             </div>
                             <div class="form-group">
                                 <!-- Email address input-->
-                                <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
+                                <input class="form-control" name="email" value="{{ old('email') }}" id="email" type="email" placeholder="メールアドレス *" data-sb-validations="required,email" />
                                 <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                                 <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                             </div>
                             <div class="form-group mb-md-0">
                                 <!-- Phone number input-->
-                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                                <select class="form-control" name="review" value="{{ old('review') }}" id="review" type="review" placeholder="▼選択してください *" data-sb-validations="required" >
+                                  <div class="invalid-feedback" data-sb-feedback="review:required">A review is required.</div>
+                                  <option value="">▼選択してください</option>
+                                  <option value="★☆☆☆☆">★☆☆☆☆</option>
+                                  <option value="★★☆☆☆">★★☆☆☆</option>
+                                  <option value="★★★☆☆">★★★☆☆</option>
+                                  <option value="★★★★☆">★★★★☆</option>
+                                  <option value="★★★★★">★★★★★</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-textarea mb-md-0">
                                 <!-- Message input-->
-                                <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                                <textarea class="form-control" name="body" value="{{ old('body') }}" id="body" placeholder="コメント *" data-sb-validations="required"></textarea>
+                                <div class="invalid-feedback" data-sb-feedback="body:required">A comment is required.</div>
                             </div>
                         </div>
                     </div>
@@ -375,7 +383,15 @@
                     <!-- an error submitting the form-->
                     <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                     <!-- Submit Button-->
-                    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send Message</button></div>
+                    @auth
+                      <div class="text-center">
+                        <button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit" value="submit">Send Message</button>
+                      </div>
+                    @else
+                      <a href="#" class="text-center">
+                        <button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">ログインへ</button>
+                      </a>
+                    @endauth
                 </form>
             </div>
         </section>
