@@ -20,19 +20,25 @@ class UsersController extends Controller
     }
 
     // マイページでの登録した商品一覧
-    public function index (ItemUser $item_user, Item $item, Post $post) {
+    public function index (ItemUser $item_user, Item $item, Post $post, Request $request) {
 
         $items = Item::orderBy('created_at', 'desc')->paginate(1);
-        $item_users = Auth::user()->Item_users()->orderBy('created_at', 'desc')->paginate(5);
-        $posts = Auth::user()->posts()->orderBy('created_at', 'desc')->paginate(4);
+
+        // 登録した商品一覧とページネーション
+        $item_users = Auth::user()->Item_users()->orderBy('created_at', 'desc')->paginate(10,["*"], 'item-page')
+        ->appends(["post-page" => $request->input('post-page')]);
+
+        // 投稿したレビューの一覧とページネーション
+        $posts = Auth::user()->posts()->orderBy('created_at', 'desc')->paginate(8,["*"], 'post-page')
+        ->appends(["item-page" => $request->input('item-page')]);
+
         return view('dashboard', $item, compact( 'items', 'item', 'item_users', 'item_user', 'posts'));
     }
 
     // マイページでの登録した商品詳細
     public function show (ItemUser $item_user, Item $item) {
 
-        Log::debug($item_user);
-        $item_user = ItemUser::find($item);
+        $item_user = $item->item_users()->get();
         Log::debug($item_user);
 
         $color = config('color');

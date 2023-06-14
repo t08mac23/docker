@@ -57,8 +57,8 @@
 
         <div class="sm:col-span-2">
           <label for="body" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">コメント</label>
-          <input class="h-64 w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
-          name="body" placeholder="コメント" value="{{ old('body', $post->body) }}" required />
+          <textarea class="h-64 w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
+          name="body" placeholder="コメント" required>{{ old('body', $post->body) }}</textarea>
         </div>
 
         <div class="flex items-center justify-between sm:col-span-2">

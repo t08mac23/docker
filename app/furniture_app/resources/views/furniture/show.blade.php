@@ -16,8 +16,6 @@
       <div class="space-y-4">
         <div class="relative overflow-hidden rounded-lg bg-gray-100">
           <img src="{{ asset('/storage/images/'.$item->img_path) }}" alt="Photo" class="h-full w-full object-cover object-center" />
-
-          <span class="absolute left-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm uppercase tracking-wider text-white">sale</span>
         </div>
 
         <div class="grid grid-cols-1 gap-2">
@@ -35,8 +33,9 @@
       <div class="md:py-8">
         <!-- name - start -->
         <div class="mb-2 md:mb-3">
-          <span class="mb-0.5 inline-block text-gray-500">{{ $item->release_day}}</span>
-          <h2 class="text-2xl font-bold text-gray-800 lg:text-3xl">{{ $item->name}}</h2>
+          <span class="mb-0.5 inline-block text-gray-500">発売日：{{ $item->release_day}}</span>
+          <h2 class="text-2xl font-bold text-gray-800 lg:text-3xl">商品名：{{ $item->name}}</h2>
+          <span class="text-sm">カテゴリー：{{ $item->category_name }}</span>
         </div>
         <!-- name - end -->
 
@@ -65,8 +64,6 @@
           </div>
 
           <span class="ml-2 text-sm text-gray-500">4.2</span>
-
-          <a href="#" class="ml-4 text-sm font-semibold text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700">view all 47 reviews</a>
         </div>
         <!-- rating - end -->
 
@@ -75,10 +72,15 @@
           <span class="mb-3 inline-block text-sm font-semibold text-gray-500 md:text-base">Color</span>
 
           <div class="flex flex-wrap gap-2">
-            <span class="h-8 w-8 rounded-full border bg-gray-800 ring-2 ring-gray-800 ring-offset-1 transition duration-100"></span>
-            <button type="button" class="h-8 w-8 rounded-full border bg-gray-500 ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
-            <button type="button" class="h-8 w-8 rounded-full border bg-gray-200 ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
+            {{ $item->color_name }}
+            <span class="h-8 w-8 rounded-full border bg-red-300 ring-2 ring-gray-800 ring-offset-1 transition duration-100"></span>
+            <button type="button" class="h-8 w-8 rounded-full border bg-blue-300 ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
+            <button type="button" class="h-8 w-8 rounded-full border bg-yellow-300 ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
+            <button type="button" class="h-8 w-8 rounded-full border bg-green-300 ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
+            <button type="button" class="h-8 w-8 rounded-full border bg-orange-300 ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
+            <button type="button" class="h-8 w-8 rounded-full border bg-orange-900 ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
             <button type="button" class="h-8 w-8 rounded-full border bg-white ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
+            <button type="button" class="h-8 w-8 rounded-full border bg-black ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
           </div>
         </div>
         <!-- color - end -->
@@ -88,11 +90,9 @@
           <span class="mb-3 inline-block text-sm font-semibold text-gray-500 md:text-base">Size</span>
 
           <div class="flex flex-wrap gap-3">
-            <button type="button" class="flex h-8 w-12 items-center justify-center rounded-md border bg-white text-center text-sm font-semibold text-gray-800 transition duration-100 hover:bg-gray-100 active:bg-gray-200">XS</button>
-            <button type="button" class="flex h-8 w-12 items-center justify-center rounded-md border bg-white text-center text-sm font-semibold text-gray-800 transition duration-100 hover:bg-gray-100 active:bg-gray-200">S</button>
-            <span class="flex h-8 w-12 cursor-default items-center justify-center rounded-md border border-indigo-500 bg-indigo-500 text-center text-sm font-semibold text-white">M</span>
-            <button type="button" class="flex h-8 w-12 items-center justify-center rounded-md border bg-white text-center text-sm font-semibold text-gray-800 transition duration-100 hover:bg-gray-100 active:bg-gray-200">L</button>
-            <span class="flex h-8 w-12 cursor-not-allowed items-center justify-center rounded-md border border-transparent bg-white text-center text-sm font-semibold text-gray-400">XL</span>
+            高さ：{{ $item->height }}
+            横幅：{{ $item->width }}
+            奥行き：{{ $item->length }}
           </div>
         </div>
         <!-- size - end -->
@@ -100,8 +100,7 @@
         <!-- price - start -->
         <div class="mb-4">
           <div class="flex items-end gap-2">
-            <span class="text-xl font-bold text-gray-800 md:text-2xl">$15.00</span>
-            <span class="mb-0.5 text-red-500 line-through">$30.00</span>
+            <span class="text-xl font-bold text-gray-800 md:text-2xl">{{ $item->plan_name }}</span>
           </div>
 
           <span class="text-sm text-gray-500">incl. VAT plus shipping</span>

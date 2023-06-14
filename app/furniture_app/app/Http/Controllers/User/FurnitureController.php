@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class FurnitureController extends Controller
 {
     public function index () {
-        $items = Item::orderBy('created_at', 'desc')->get();
+        $items = Item::orderBy('created_at', 'desc')->paginate(12,["*"], 'item-page');
         $user = auth()->user();
         return view('furniture.index', compact('items', 'user'));
     }

@@ -37,18 +37,19 @@ Route::prefix('furniture')->group(function () {
     Route::get('index', [FurnitureController::class, 'index'])->name('furniture.index');
     Route::get('show/{item}', [FurnitureController::class, 'show'])->name('furniture.show');
 
-    // サブスク
+    // サブスク登録・削除
     Route::prefix('subscription')->group(function () {
         Route::get('create/{item}', [SubscriptionController::class, 'create'])->name('sub.create');
         Route::post('store/{item}', [SubscriptionController::class, 'store'])->name('sub.store');
-        Route::delete('destroy/{item_user}', [SubscriptionController::class, 'destroy'])->name('sub.destroy');
+        Route::delete('destroy/{item}', [SubscriptionController::class, 'destroy'])->name('sub.destroy');
     });
 });
 
-// レビュー投稿・編集・更新・削除
+// レビュー投稿・編集・更新・削除・一覧
 Route::prefix('post')->group(function () {
     Route::post('store', [PostsController::class, 'store'])->name('post.store');
     Route::get('edit/{post}', [PostsController::class, 'edit'])->name('post.edit');
     Route::put('update/{post}', [PostsController::class, 'update'])->name('post.update');
     Route::delete('destroy/{post}', [PostsController::class, 'destroy'])->name('post.destroy');
+    Route::get('index', [PostsController::class, 'index'])->name('post.index');
 });

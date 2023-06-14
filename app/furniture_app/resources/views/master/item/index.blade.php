@@ -35,6 +35,7 @@
         </div>
       </div>
     @endforeach
+    {{ $items->appends(request()->input())->links() }}
     <div id="float_button" class="float_button">
         <a href="{{ route('item.create') }}">投稿する</a>
     </div>

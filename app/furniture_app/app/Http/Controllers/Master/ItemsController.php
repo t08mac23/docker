@@ -19,7 +19,7 @@ class ItemsController extends Controller
     if (Auth::guard('masters')->user() == null) {
       return redirect('master/index');
     }else {
-      $items = Item::orderBy('created_at', 'desc')->get();
+      $items = Item::orderBy('created_at', 'desc')->paginate(5,["*"], 'item-page');
       $user = auth()->user();
       return view('master.item.index', compact('items', 'user'));
     }

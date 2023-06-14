@@ -18,6 +18,12 @@ class PostsController extends Controller
     }
 
 
+    // 一覧表示
+    public function index () {
+        $posts = Post::orderBy('created_at', 'desc')->get();
+        return view('post.index', compact('posts'));
+    }
+
     // レビュー投稿保存
     public function store (Request $request) {
 
@@ -40,9 +46,6 @@ class PostsController extends Controller
         $post->save();
         return redirect()->route('dashboard')->with('message', '投稿しました');
     }
-
-
-    // レビュー詳細
 
 
 
@@ -70,6 +73,7 @@ class PostsController extends Controller
 
         return redirect()->route('dashboard')->with('message', '更新しました');
     }
+
 
 
     // レビュー削除

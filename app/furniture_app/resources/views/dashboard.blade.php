@@ -30,7 +30,7 @@
                         </div>
                         <!-- text - end -->
 
-                        <!-- product - start -->
+                        <!-- items - start -->
                         @foreach(auth()->user()->items as $item)
                             <div class="grid gap-6 sm:grid-cols-2">
                                     <div class="flex items-end gap-2">
@@ -59,9 +59,16 @@
                                 </form>
                             </div>
                         @endforeach
-                        <!-- product - end -->
+                        {{ $item_users->appends(request()->input())->links() }}
+                        <!-- items - end -->
 
 
+                        <div class="mb-10 md:mb-16">
+                            <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
+                                <a href="{{ route('root') }}" >Your Furniture</a>
+                            </h2>
+                            <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p>
+                        </div>
                         <div class="bg-white py-6 sm:py-8 lg:py-12">
                             <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
                                 <div class="mb-6 flex items-end justify-between gap-4">
@@ -73,7 +80,7 @@
                                     @foreach(auth()->user()->posts as $post)
                                         <div>
                                             <a href="#" class="group mb-2 block h-96 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:mb-3">
-                                                {{ $post->body }}
+                                            {!! nl2br(e($post->body)) !!}
                                             </a>
 
                                             <div class="flex flex-col">
@@ -102,6 +109,7 @@
                                         </div>
                                     @endforeach
                                     <!-- product - end -->
+                                    {{ $posts->appends(request()->query())->links() }}
                                 </div>
                             </div>
                         </div>
