@@ -21,9 +21,9 @@
                 <div> 横幅：{{ $item->width }} </div>
                 <div> 奥行き：{{ $item->length }} </div>
                 <div> 発売日：{{ $item->release_day }} </div>
-                <div> カラー：{{ $item->color_id }} </div>
-                <div> カテゴリー：{{ $item->category_id }} </div>
-                <div> プラン：{{ $item->plan_id }} </div>
+                <div> カラー：{{ $item->color_name }} </div>
+                <div> カテゴリー：{{ $item->category_name }} </div>
+                <div> プラン：{{ $item->plan_name }} </div>
                 <p> 投稿者：{{ $item->master->master_name }} </p>
                 <p> 投稿日：{{ $item->created_at }} </p>
                 <p> 更新日：{{ $item->updated_at }} </p>

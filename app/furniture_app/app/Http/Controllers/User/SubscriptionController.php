@@ -45,8 +45,8 @@ class SubscriptionController extends Controller
 
     // 登録した商品の削除
     public function destroy (ItemUser $item_user, Item $item) {
-        $item_user = $item->item_users()->get();
-        Log::debug($item_user);
+        $item_user_get = $item->item_users()->get();
+        $item_user = $item_user_get->first();
 
         $item_user->delete();
 

@@ -38,20 +38,22 @@
 
                 <select name="color" required id="color" class="px-4 my-5 border shadow rounded w-3/4">
                   @foreach($colors as $color_id => $name)
-                    <option value="{{ old('color_id', $item->$color_id) }}" hidden>{{ $name }}</option>
+                    <option value="{{ old('color_id', $item->$color_id) }}" hidden>{{ $item->color_name }}</option>
                     <option value="{{ $color_id }}" >{{ $name }}</option>
                   @endforeach
                 </select>
-                <select name="category" required value="{{ old('category_id') }}" id="category" class="px-4 my-5 border shadow rounded w-3/4">
+
+                <select name="category" required id="category" class="px-4 my-5 border shadow rounded w-3/4">
                   @foreach($categories as $category_id => $name)
-                    <option value="{{ $item->$category_id }}" @if(old('category', $item->category_id) == $item->category_id) selected @endif hidden>{{ $name }}</option>
+                    <option value="{{ old('category_id', $item->$category_id) }}" hidden>{{ $item->category_name }}</option>
                     <option value="{{ $category_id }}" >{{ $name }}</option>
                   @endforeach
                 </select>
-                <select name="plan" required value="{{ old('plan_id') }}" id="plan" class="px-4 my-5 border shadow rounded w-3/4">
+
+                <select name="plan" required id="plan" class="px-4 my-5 border shadow rounded w-3/4">
                   @foreach($plans as $plan_id => $name)
-                    <option value="" hidden>{{ $name }}</option>
-                    <option value="{{ $plan_id }}"  @if(old('plan', $item->plan_id) == $item->plan_id) selected @endif>{{ $name }}</option>
+                    <option value="{{ old('plan_id', $item->$plan_id) }}" hidden>{{ $item->plan_name }}</option>
+                    <option value="{{ $plan_id }}" >{{ $name }}</option>
                   @endforeach
                 </select>
 
