@@ -26,11 +26,11 @@ class MasterController extends Controller
 
         if(Auth::guard($guard)->attempt($credentials)) {
             return redirect()->route('item.index'); // ログインしたらリダイレクト
-        }
-
-        return back()->withErrors([
+        }else {
+            return back()->withErrors([
             'auth' => ['認証に失敗しました']
-        ]);
+            ]);
+        }
     }
 
     //ログアウト処理

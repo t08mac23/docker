@@ -80,13 +80,13 @@
             <div class="flex flex-wrap gap-2">
               {{ $item->color_name }}
               <span class="h-8 w-8 rounded-full border bg-red-300 ring-2 ring-gray-800 ring-offset-1 transition duration-100"></span>
-              <button type="button" class="h-8 w-8 rounded-full border bg-blue-300 ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
-              <button type="button" class="h-8 w-8 rounded-full border bg-yellow-300 ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
-              <button type="button" class="h-8 w-8 rounded-full border bg-green-300 ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
-              <button type="button" class="h-8 w-8 rounded-full border bg-orange-300 ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
-              <button type="button" class="h-8 w-8 rounded-full border bg-orange-900 ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
-              <button type="button" class="h-8 w-8 rounded-full border bg-white ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
-              <button type="button" class="h-8 w-8 rounded-full border bg-black ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"></button>
+              <span class="h-8 w-8 rounded-full border bg-blue-300 ring-2 ring-gray-800 ring-offset-1 transition duration-100"></span>
+              <span class="h-8 w-8 rounded-full border bg-yellow-300 ring-2 ring-gray-800 ring-offset-1 transition duration-100"></span>
+              <span class="h-8 w-8 rounded-full border bg-green-300 ring-2 ring-gray-800 ring-offset-1 transition duration-100"></span>
+              <span class="h-8 w-8 rounded-full border bg-orange-300 ring-2 ring-gray-800 ring-offset-1 transition duration-100"></span>
+              <span class="h-8 w-8 rounded-full border bg-orange-900 ring-2 ring-gray-800 ring-offset-1 transition duration-100"></span>
+              <span class="h-8 w-8 rounded-full border bg-white ring-2 ring-gray-800 ring-offset-1 transition duration-100"></span>
+              <span class="h-8 w-8 rounded-full border bg-black ring-2 ring-gray-800 ring-offset-1 transition duration-100"></span>
             </div>
         </div>
         <!-- color - end -->
@@ -129,7 +129,7 @@
             <form action="{{ route('sub.destroy', $item) }}" method="post">
               @csrf
               @method('delete')
-              <button onClick="return confirm('本当に解約しますか？')" type="submit" class="inline-block flex-1 rounded-lg bg-red-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-red-300 transition duration-100 hover:bg-red-600 focus-visible:ring active:bg-red-700 sm:flex-none md:text-base">
+              <button onClick="return confirm('本当に解約しますか？')" type="submit" class="inline-block flex-1 rounded-lg bg-red-500 px-8 py-3 text-center text-sm font-semibold outline-none ring-red-300 transition duration-100 hover:bg-red-300 focus-visible:ring active:bg-red-700 sm:flex-none md:text-base">
                 解約する
               </button>
             </form>

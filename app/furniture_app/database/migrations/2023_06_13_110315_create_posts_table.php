@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('nickname');
             $table->string('email');
             $table->string('review');
-            $table->text('body');
+            $table->string('body');
             $table->unsignedBigInteger('user_id')->onDelete('cascade');
             $table->timestamps();
         });
