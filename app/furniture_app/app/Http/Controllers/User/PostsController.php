@@ -29,10 +29,10 @@ class PostsController extends Controller
 
         // バリデーション
       $inputs = $request->validate([
-        'nickname'=>'required',
-        'email'=>'required',
+        'nickname'=>'required|max:255',
+        'email'=>'required|max:255',
         'review'=>'required',
-        'body'=>'required',
+        'body'=>'required|max:255',
       ]);
 
         // 投稿処理
@@ -58,17 +58,17 @@ class PostsController extends Controller
 
         // バリデーション
       $inputs = $request->validate([
-        'nickname'=>'required',
-        'email'=>'required',
+        'nickname'=>'required|max:255',
+        'email'=>'required|max:255',
         'review'=>'required',
-        'body'=>'required',
+        'body'=>'required|max:255',
       ]);
 
         // 更新
-      $post->nickname = $request->nickname;
-      $post->email = $request->email;
-      $post->review = $request->review;
-      $post->body = $request->body;
+        $post->nickname = $inputs['nickname'];
+        $post->email    = $inputs['email'];
+        $post->review   = $inputs['review'];
+        $post->body     = $inputs['body'];
       $post->save();
 
         return redirect()->route('dashboard')->with('message', '更新しました');

@@ -48,6 +48,7 @@ class SubscriptionController extends Controller
         $item_user_get = $item->item_users()->get();
         $item_user = $item_user_get->first();
 
+        Log::debug($item_user);
         $item_user->delete();
 
         return redirect()->route('dashboard');

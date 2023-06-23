@@ -39,7 +39,6 @@ class UsersController extends Controller
     public function show (ItemUser $item_user, Item $item) {
 
         $item_user = $item->item_users()->get();
-        Log::debug($item_user);
 
         $color = config('color');
         $category = config('category');

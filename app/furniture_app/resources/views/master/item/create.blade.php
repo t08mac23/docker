@@ -10,9 +10,12 @@
     <div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
       <div class="relative bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
         <div class="mx-auto max-w-md">
-        <h1>商品の投稿</h1>
           <div class="divide-y divide-gray-300/50">
             <div class="space-y-6 py-8 text-base leading-7 text-gray-600">
+              <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+                <div class="mb-10 md:mb-16">
+                  <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">商品投稿</h2>
+              </div>
               <form action="{{ route('item.store') }}"  method="POST" enctype="multipart/form-data">
                 @csrf
                 @if($errors->any())

@@ -21,7 +21,7 @@ class FurnitureController extends Controller
         $plan = config('plan');
         // ログインしていないユーザーは詳細ページへいけない
         if (Auth::guard('masters')->user() == null && Auth::guard('web')->user() == null) {
-            return redirect()->route('furniture.index');
+            return redirect()->route('login');
         }else {
             return view('furniture.show', $item, compact('item'))
             ->with(['color' => $color])->with(['category' => $category])->with(['plan' => $plan]);

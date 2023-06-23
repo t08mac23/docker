@@ -44,11 +44,11 @@ class ItemsController extends Controller
 
       // バリデーション
       $inputs = $request->validate([
-        'name'=>'required',
-        'height'=>'required',
-        'width'=>'required',
-        'length'=>'required',
-        'release_day'=>'required',
+        'name'=>'required|max:255',
+        'height'=>'required|max:255',
+        'width'=>'required|max:255',
+        'length'=>'required|max:255',
+        'release_day'=>'required|max:255',
         'color_id'=>'numeric',
         'category_id'=>'numeric',
         'plan_id'=>'numeric',
@@ -85,6 +85,7 @@ class ItemsController extends Controller
       $color = config('color');
       $category = config('category');
       $plan = config('plan');
+
       // ログインしていないユーザーは詳細ページへいけない
       if (Auth::guard('masters')->user() == null) {
         return redirect('master/index');
@@ -99,6 +100,7 @@ class ItemsController extends Controller
       $colors = config('color');
       $categories = config('category');
       $plans = config('plan');
+
       // ログインしているユーザーと投稿者が同じなら編集ページへ行ける
       if ($item->master_id == Auth::guard('masters')->id()) {
         return view('master.item.edit', compact('item'))->with(['colors' => $colors])->with(['categories' => $categories])->with(['plans' => $plans]);
@@ -113,11 +115,11 @@ class ItemsController extends Controller
 
       // バリデーション
       $inputs = $request->validate([
-        'name'=>'required',
-        'height'=>'required',
-        'width'=>'required',
-        'length'=>'required',
-        'release_day'=>'required',
+        'name'=>'required|max:255',
+        'height'=>'required|max:255',
+        'width'=>'required|max:255',
+        'length'=>'required|max:255',
+        'release_day'=>'required|max:255',
         'color_id'=>'numeric',
         'category_id'=>'numeric',
         'plan_id'=>'numeric',
@@ -125,11 +127,11 @@ class ItemsController extends Controller
       ]);
 
       // 商品データ更新
-      $item->name = $request->name;
-      $item->height = $request->height;
-      $item->width = $request->width;
-      $item->length = $request->length;
-      $item->release_day = $request->release_day;
+      $item->name = $inputs['name'];
+      $item->height = $inputs['height'];
+      $item->width = $inputs['width'];
+      $item->length = $inputs['length'];
+      $item->release_day = $inputs['release_day'];
       $item->color_id = $request->color;
       $item->category_id = $request->category;
       $item->plan_id = $request->plan;

@@ -11,8 +11,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('マイページ') }}
-            {{auth()->user()->name}}さん
+          レビューの一覧
         </h2>
     </x-slot>
     <div class="bg-white py-6 sm:py-8 lg:py-12">
